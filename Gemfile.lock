@@ -237,6 +237,8 @@ GEM
       prism (~> 1.4)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
+    shoulda-matchers (6.5.0)
+      activesupport (>= 5.2.0)
     sqlite3 (2.6.0-aarch64-linux-gnu)
     sqlite3 (2.6.0-arm64-darwin)
     sqlite3 (2.6.0-x86_64-linux-gnu)
@@ -272,6 +274,7 @@ DEPENDENCIES
   rails (~> 8.0.2)
   rspec-rails (~> 8.0.0)
   rubocop
+  shoulda-matchers
   sqlite3 (>= 2.1)
   tzinfo-data
 
