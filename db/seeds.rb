@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+Team.find_or_create_by!(location: 'New York', name: 'Liberty')
+Team.find_or_create_by!(location: 'Washington', name: 'Mystics')
+Team.find_or_create_by!(location: 'Connecticut', name: 'Sun')
+Team.find_or_create_by!(location: 'Atlanta', name: 'Dream')
+Team.find_or_create_by!(location: 'Dallas', name: 'Wings')
+Team.find_or_create_by!(location: 'Chicago', name: 'Sky')
+Team.find_or_create_by!(location: 'Los Angeles', name: 'Sparks')
+Team.find_or_create_by!(location: 'Minnesota', name: 'Lynx')
+Team.find_or_create_by!(location: 'Golden State', name: 'Valkyries')
+Team.find_or_create_by!(location: 'Las Vegas', name: 'Aces')
+Team.find_or_create_by!(location: 'Seattle', name: 'Storm')
+Team.find_or_create_by!(location: 'Phoenix', name: 'Mercury')
+Team.find_or_create_by!(location: 'Indiana', name: 'Fever')
