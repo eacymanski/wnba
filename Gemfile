@@ -25,5 +25,7 @@ end
 group :test do
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 8.0.0'
+  gem 'shoulda-matchers'
 end

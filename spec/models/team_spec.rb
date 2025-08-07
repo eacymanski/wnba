@@ -42,9 +42,9 @@ RSpec.describe Team, type: :model do
   end
 
   it 'sets replaced by team correctly' do
-    stars = create(:team, location: 'San Antonio', name: 'Stars')
-    aces = create(:team, location: 'Las Vegas', name: 'Aces')
-    stars.update(replaced_by: aces)
-    expect(stars.replaced_by).to eq aces
+    detriot = create(:team, location: 'Detriot', name: 'Shock')
+    tulsa = Team.new(location: 'Tulsa', name: 'Shock')
+    detriot.update(replaced_by: tulsa)
+    expect(detriot.replaced_by).to eq tulsa
   end
 end
