@@ -9,10 +9,14 @@ class DraftsController < ApplicationController
     @draft_picks = DraftPick.picks_for_round(@year, @round)
   end
 
+  def index
+    @grouped_picks = DraftPick.grouped_picks
+  end
+
   private
 
   def validate_year
-    @year = params[:year] || DraftPick.most_recent_year
+    @year = params[:id] || DraftPick.most_recent_year
     return if DraftPick.valid_year?(@year)
 
     flash.now[:error] = "Invalid Year: #{@year}"

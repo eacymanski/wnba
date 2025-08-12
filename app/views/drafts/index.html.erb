@@ -1,0 +1,7 @@
+  <div>Years:</div>
+    <% @grouped_picks.each do |draft_year| %>
+      <div><%= link_to draft_year[:year], draft_path(draft_year[:year])%>: <%=count_active_players(draft_year[:rounds].flat_map{|y| y[:picks]})%> out of <%=draft_year[:rounds].flat_map{|y| y[:picks]}.count %>  players active</div>
+      <% draft_year[:rounds].each do |round| %>
+        <div> Round <%= round[:round] %>:  <%= count_active_players(round[:picks])%> out of <%= round[:picks].count%> players active</div>
+        <%end%>
+    <%end%>

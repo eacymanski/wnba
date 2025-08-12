@@ -4,24 +4,25 @@
   <div>Years:</div>
   <ol>
     <% @years.each do |y| %>
-      <li><%= link_to y, drafts_path(year: y) %></li>
+      <li><%= link_to y, draft_path(y) %></li>
     <%end%>
   </ol>
   <div>Year: <%= @year %></div>
   <div>Rounds:</div>
   <ol>
     <% @rounds.each do |r| %>
-      <li><%= link_to r, drafts_path(year: @year, round: r) %></li>
+      <li><%= link_to r, draft_path(@year, round: r) %></li>
     <%end%>
   </ol>
   <div>Round: <%= @round %></div>
-  <div>Draft Picks:</div>
+  <div>Currently Active: <%= count_active_players(@draft_picks) %></div>
   <br>
   <% @draft_picks.each do |p| %>
     <div> Pick: <%= p.pick %> </div>
     <div> Name: <%= p.player.name %> </div>
     <div> Team: <%= p.team.location %> <%= p.team.name %> </div>
     <div> College: <%= p.college&.name %> </div>
+    <div> Currently Active: <%= p.player.is_active %> </div>
     <br>
   <% end %>
 <% end %>
