@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DraftsController < ApplicationController
-  before_action :validate_year, :validate_round
+  before_action :validate_year, :validate_round, only: :show
 
   def show
     @rounds = DraftPick.rounds_for_year(@year)
@@ -10,7 +10,8 @@ class DraftsController < ApplicationController
   end
 
   def index
-    @grouped_picks = DraftPick.grouped_picks
+    @years = DraftPick.years
+    @active_data = DraftPick.active_data
   end
 
   private

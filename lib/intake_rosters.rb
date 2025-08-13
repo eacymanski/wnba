@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-module IntakePlayerList
-  def self.update_current_rosters
+module IntakeRosters
+  def update_current_rosters
     players = get_player_list_data
     reset_current_teams
     players.each do |player_data|
-      player = Player.find_by(wnba_id: wnba_id(player_data))
-      player ||= update_player_if_exists(player_data)
-      player ||= create_player(player_data)
+      player = get_or_create_player(player_data)
       player.update(is_active: true, current_team: Team.find_by(location: team_location(player_data)))
     end
   end
@@ -19,6 +17,16 @@ module IntakePlayerList
 
   private_class_method def self.reset_current_teams
     Player.update_all(current_team_id: nil, is_active: false)
+  end
+
+  private_class_method def self.get_or_create_player(player_data)
+    player = Player.find_by(wnba_id: wnba_id(player_data))
+    return player if player
+
+    player = update_player_if_exists(player_data)
+    return player if player
+
+    create_player(player_data)
   end
 
   private_class_method def self.update_player_if_exists(player_data)
