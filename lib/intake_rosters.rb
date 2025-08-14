@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module IntakeRosters
-  def update_current_rosters
+  def self.intake
     players = get_player_list_data
     reset_current_teams
     players.each do |player_data|

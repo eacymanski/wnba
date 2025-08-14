@@ -15,7 +15,7 @@
     <%end%>
   </ol>
   <div>Round: <%= @round %></div>
-  <div>Currently Active: <%= count_active_players(@draft_picks) %></div>
+  <div>Currently Active: <%= @draft_picks.count { |p| p.player.is_active } %></div>
   <br>
   <% @draft_picks.each do |p| %>
     <div> Pick: <%= p.pick %> </div>
