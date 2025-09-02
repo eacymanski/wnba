@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DraftsController < ApplicationController
-  before_action :validate_year, :validate_round
+  before_action :validate_year, :validate_round, only: :show
 
   def show
     @rounds = DraftPick.rounds_for_year(@year)
@@ -9,10 +9,15 @@ class DraftsController < ApplicationController
     @draft_picks = DraftPick.picks_for_round(@year, @round)
   end
 
+  def index
+    @years = DraftPick.years
+    @active_data = DraftPick.active_data
+  end
+
   private
 
   def validate_year
-    @year = params[:year] || DraftPick.most_recent_year
+    @year = params[:id] || DraftPick.most_recent_year
     return if DraftPick.valid_year?(@year)
 
     flash.now[:error] = "Invalid Year: #{@year}"

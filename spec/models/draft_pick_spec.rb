@@ -88,5 +88,27 @@ RSpec.describe DraftPick, type: :model do
       expect(DraftPick.valid_round?(2023, 1)).to be false
       expect(DraftPick.valid_round?(2022, 2)).to be false
     end
+
+    it 'returns correct active data' do
+      active_player_1 = create(:player, is_active: true)
+      active_player_2 = create(:player, is_active: true)
+      inactive_player_1 = create(:player, is_active: false)
+      inactive_player_2 = create(:player, is_active: false)
+      create(:draft_pick, year: 2023, round: 1, player: active_player_1)
+      create(:draft_pick, year: 2023, round: 1, player: inactive_player_1)
+      create(:draft_pick, year: 2023, round: 2, player: active_player_2)
+      create(:draft_pick, year: 2022, round: 1, player: inactive_player_2)
+
+      expected_data = {
+        2022 => { total: 1, active: 0, rounds: { 1 => { total: 1, active: 0 } } },
+        2023 => { total: 3, active: 2,
+                  rounds: {
+                    1 => { total: 2, active: 1 },
+                    2 => { total: 1, active: 1 }
+                  } }
+      }
+
+      expect(DraftPick.active_data).to eq(expected_data)
+    end
   end
 end

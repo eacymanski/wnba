@@ -20,6 +20,6 @@ FactoryBot.define do
     team
     year { 2025 }
     round { 1 }
-    pick { 7 }
+    pick { Faker::Number.between(from: 1, to: 100) }
   end
 end

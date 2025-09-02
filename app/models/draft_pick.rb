@@ -33,5 +33,14 @@ class DraftPick < ApplicationRecord
     def valid_round?(year, round)
       exists?(year: year, round: round)
     end
+
+    def active_data
+      all.group_by(&:year).transform_values do |picks|
+        { total: picks.count, active: picks.count { |pick| pick.player&.is_active },
+          rounds: picks.group_by(&:round).transform_values do |round_picks|
+            { total: round_picks.count, active: round_picks.count { |pick| pick.player&.is_active } }
+          end }
+      end
+    end
   end
 end
